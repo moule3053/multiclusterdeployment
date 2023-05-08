@@ -1,0 +1,108 @@
+---
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  annotations:
+    controller-gen.kubebuilder.io/version: v0.11.3
+  creationTimestamp: null
+  name: multiclusterdeployments.mcd.moule.com
+spec:
+  group: mcd.moule.com
+  names:
+    kind: MultiClusterDeployment
+    listKind: MultiClusterDeploymentList
+    plural: multiclusterdeployments
+    singular: multiclusterdeployment
+  scope: Namespaced
+  versions:
+  - name: v1
+    schema:
+      openAPIV3Schema:
+        description: MultiClusterDeployment is the Schema for the multiclusterdeployments
+          API
+        properties:
+          apiVersion:
+            description: 'APIVersion defines the versioned schema of this representation
+              of an object. Servers should convert recognized schemas to the latest
+              internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources'
+            type: string
+          kind:
+            description: 'Kind is a string value representing the REST resource this
+              object represents. Servers may infer this from the endpoint the client
+              submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds'
+            type: string
+          metadata:
+            type: object
+          spec:
+            description: MultiClusterDeploymentSpec defines the desired state of MultiClusterDeployment
+            properties:
+              clusters:
+                description: Clusters is the list of target clusters for the Deployment
+                items:
+                  type: string
+                type: array
+              cpuLimit:
+                additionalProperties:
+                  anyOf:
+                  - type: integer
+                  - type: string
+                  pattern: ^(\+|-)?(([0-9]+(\.[0-9]*)?)|(\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\+|-)?(([0-9]+(\.[0-9]*)?)|(\.[0-9]+))))?$
+                  x-kubernetes-int-or-string: true
+                description: CPULimit is the CPU limit for the container
+                type: object
+              cpuRequest:
+                additionalProperties:
+                  anyOf:
+                  - type: integer
+                  - type: string
+                  pattern: ^(\+|-)?(([0-9]+(\.[0-9]*)?)|(\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\+|-)?(([0-9]+(\.[0-9]*)?)|(\.[0-9]+))))?$
+                  x-kubernetes-int-or-string: true
+                description: CPURequest is the requested amount of CPU for the container
+                type: object
+              image:
+                description: Image
+                type: string
+              memoryLimit:
+                additionalProperties:
+                  anyOf:
+                  - type: integer
+                  - type: string
+                  pattern: ^(\+|-)?(([0-9]+(\.[0-9]*)?)|(\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\+|-)?(([0-9]+(\.[0-9]*)?)|(\.[0-9]+))))?$
+                  x-kubernetes-int-or-string: true
+                description: MemoryLimit is the memory limit for the container
+                type: object
+              memoryRequest:
+                additionalProperties:
+                  anyOf:
+                  - type: integer
+                  - type: string
+                  pattern: ^(\+|-)?(([0-9]+(\.[0-9]*)?)|(\.[0-9]+))(([KMGTPE]i)|[numkMGTPE]|([eE](\+|-)?(([0-9]+(\.[0-9]*)?)|(\.[0-9]+))))?$
+                  x-kubernetes-int-or-string: true
+                description: MemoryRequest is the requested amount of memory for the
+                  container
+                type: object
+              name:
+                description: Name of the Deployment
+                type: string
+              replicas:
+                description: Replicas is the desired number of replicas for the Deployment
+                format: int32
+                type: integer
+            required:
+            - clusters
+            - cpuLimit
+            - cpuRequest
+            - image
+            - memoryLimit
+            - memoryRequest
+            - name
+            type: object
+          status:
+            description: MultiClusterDeploymentStatus defines the observed state of
+              MultiClusterDeployment
+            type: object
+        type: object
+    served: true
+    storage: true
+    subresources:
+      status: {}

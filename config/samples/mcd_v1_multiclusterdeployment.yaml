@@ -1,0 +1,12 @@
+apiVersion: mcd.moule.com/v1
+kind: MultiClusterDeployment
+metadata:
+  labels:
+    app.kubernetes.io/name: multiclusterdeployment
+    app.kubernetes.io/instance: multiclusterdeployment-sample
+    app.kubernetes.io/part-of: multiclusterdeployment
+    app.kubernetes.io/managed-by: kustomize
+    app.kubernetes.io/created-by: multiclusterdeployment
+  name: multiclusterdeployment-sample
+spec:
+  # TODO(user): Add fields here

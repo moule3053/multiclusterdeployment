@@ -1,0 +1,27 @@
+# permissions for end users to view multiclusterdeployments.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  labels:
+    app.kubernetes.io/name: clusterrole
+    app.kubernetes.io/instance: multiclusterdeployment-viewer-role
+    app.kubernetes.io/component: rbac
+    app.kubernetes.io/created-by: multiclusterdeployment
+    app.kubernetes.io/part-of: multiclusterdeployment
+    app.kubernetes.io/managed-by: kustomize
+  name: multiclusterdeployment-viewer-role
+rules:
+- apiGroups:
+  - mcd.moule.com
+  resources:
+  - multiclusterdeployments
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - mcd.moule.com
+  resources:
+  - multiclusterdeployments/status
+  verbs:
+  - get
