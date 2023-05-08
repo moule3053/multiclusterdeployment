@@ -1,0 +1,18 @@
+apiVersion: mcd.moule.com/v1
+kind: MultiClusterDeployment
+metadata:
+  name: example-multiclusterdeployment
+spec:
+  name: example-deployment
+  clusters:
+    - minikube
+  replicas: 1
+  image: nginx:latest
+  cpuRequest:
+    cpu: "100m"
+  memoryRequest:
+    memory: "128Mi"
+  cpuLimit:
+    cpu: "200m"
+  memoryLimit:
+    memory: "256Mi"
